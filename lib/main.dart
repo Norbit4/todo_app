@@ -20,22 +20,22 @@ void main() async {
     initialRoute = '/';
   }
 
-  runApp(MyApp(initialRoute: initialRoute, name: name ?? ''));
+  runApp(MyApp(
+    initialRoute: initialRoute,
+  ));
 }
 
 class MyApp extends StatelessWidget {
   final String initialRoute;
-  final String name;
 
-  const MyApp({Key? key, required this.initialRoute, required this.name})
-      : super(key: key);
+  const MyApp({Key? key, required this.initialRoute}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       initialRoute: initialRoute,
       routes: {
-        '/': (context) => MainScreen(name: name),
+        '/': (context) => const MainScreen(),
         '/name': (context) => const NameScreen(),
         '/note': (context) => const CreateNoteScreen(),
       },

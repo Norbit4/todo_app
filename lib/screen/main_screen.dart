@@ -3,17 +3,18 @@ import 'package:todo_app/model/note_model.dart';
 import '../widget/note_widget.dart';
 import 'package:hive/hive.dart';
 import 'dart:math';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MainScreen extends StatefulWidget {
-  final String name;
-
-  const MainScreen({Key? key, required this.name}) : super(key: key);
+  const MainScreen({Key? key}) : super(key: key);
 
   @override
   MainScreenState createState() => MainScreenState();
 }
 
 class MainScreenState extends State<MainScreen> {
+  String? name = '';
+
   List<NoteWidget> notes = [];
   late Box<NoteModel> notesBox;
 
@@ -21,6 +22,14 @@ class MainScreenState extends State<MainScreen> {
   void initState() {
     super.initState();
     loadNotes();
+    loadName();
+  }
+
+  void loadName() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      name = prefs.getString('name') ?? '';
+    });
   }
 
   void loadNotes() async {
@@ -87,7 +96,7 @@ class MainScreenState extends State<MainScreen> {
       appBar: AppBar(
         backgroundColor: Colors.red[400],
         automaticallyImplyLeading: false,
-        title: Text('Twoje zadania ${widget.name}'),
+        title: Text('Twoje zadania $name'),
       ),
       body: Center(
         child: ListView.builder(
