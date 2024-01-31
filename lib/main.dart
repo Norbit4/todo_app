@@ -13,7 +13,7 @@ void main() async {
   await Hive.openBox<NoteModel>('notes');
 
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  String? name = prefs.getString('namesd');
+  String? name = prefs.getString('name');
   String initialRoute = '/name';
 
   if (name != null && name.isNotEmpty) {

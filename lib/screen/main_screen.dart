@@ -20,6 +20,10 @@ class MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
+    loadNotes();
+  }
+
+  void loadNotes() async {
     notesBox = Hive.box<NoteModel>('notes');
     notes = notesBox.values
         .map((note) => NoteWidget(
