@@ -7,6 +7,8 @@ class NoteWidget extends StatefulWidget {
   final Function removeNote;
   final Function editNoteStatus;
   final bool isChecked;
+  final String text;
+  final DateTime date;
 
   const NoteWidget({
     Key? key,
@@ -16,6 +18,8 @@ class NoteWidget extends StatefulWidget {
     required this.removeNote,
     required this.isChecked,
     required this.editNoteStatus,
+    required this.text,
+    required this.date,
   }) : super(key: key);
 
   @override
@@ -69,13 +73,29 @@ class NoteWidgetState extends State<NoteWidget> {
               alignment: Alignment.centerLeft,
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
-                child: Text(
-                  widget.title,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    decoration: isChecked ? TextDecoration.lineThrough : null,
-                  ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment
+                      .center, // Dodano wyśrodkowanie w poziomie
+                  children: [
+                    Text(
+                      widget.title,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        decoration:
+                            isChecked ? TextDecoration.lineThrough : null,
+                      ),
+                    ),
+                    if (widget.text.isNotEmpty)
+                      Text(
+                        widget.text,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          // Dodaj dowolne style dla drugiego tekstu
+                        ),
+                      ),
+                  ],
                 ),
               ),
             ),

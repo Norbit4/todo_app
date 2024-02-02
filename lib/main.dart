@@ -10,7 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(NoteAdapter());
-  await Hive.openBox<NoteModel>('notes');
+  await Hive.openBox<NoteModel>('tasks');
 
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? name = prefs.getString('name');

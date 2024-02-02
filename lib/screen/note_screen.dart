@@ -33,8 +33,8 @@ class CreateNoteScreenState extends State<CreateNoteScreen> {
 
   @override
   Widget build(BuildContext context) {
-    int maxLengthText = 100;
-    int maxLengthTitle = 40;
+    int maxLengthText = 70;
+    int maxLengthTitle = 25;
 
     final Function createNote =
         ModalRoute.of(context)!.settings.arguments as Function;
@@ -82,7 +82,7 @@ class CreateNoteScreenState extends State<CreateNoteScreen> {
                   _text = text;
                 });
               },
-              maxLines: 3,
+              maxLines: 2,
               maxLength: maxLengthText,
               decoration: InputDecoration(
                 labelText: 'Wpisz opis',
@@ -104,10 +104,7 @@ class CreateNoteScreenState extends State<CreateNoteScreen> {
                 ));
                 return;
               }
-              createNote(
-                _title,
-                _appBarColor,
-              );
+              createNote(_title, _appBarColor, _text);
               Navigator.pop(context);
             },
             icon: const Icon(Icons.save),

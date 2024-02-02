@@ -33,17 +33,20 @@ class MainScreenState extends State<MainScreen> {
   }
 
   void loadNotes() async {
-    notesBox = Hive.box<NoteModel>('notes');
+    notesBox = Hive.box<NoteModel>('tasks');
     notes = notesBox.values
         .map((note) => NoteWidget(
-              id: note.id,
-              title: note.title,
-              color: Color(int.parse(note.color)),
-              removeNote: removeNote,
-              isChecked: note.isChecked,
-              editNoteStatus: editNoteStatus,
-            ))
+            id: note.id,
+            title: note.title,
+            color: Color(int.parse(note.color)),
+            removeNote: removeNote,
+            isChecked: note.isChecked,
+            editNoteStatus: editNoteStatus,
+            text: note.text,
+            date: DateTime.parse(note.date)))
         .toList();
+
+    notes.sort((a, b) => b.date.compareTo(a.date));
   }
 
   void removeNote(NoteWidget value) async {
@@ -62,8 +65,9 @@ class MainScreenState extends State<MainScreen> {
     );
   }
 
-  void createNote(String title, Color color) async {
+  void createNote(String title, Color color, String text) async {
     String id = generateUniqueId(6);
+    DateTime now = DateTime.now();
 
     setState(() {
       notes.add(NoteWidget(
@@ -72,10 +76,19 @@ class MainScreenState extends State<MainScreen> {
           color: color,
           removeNote: removeNote,
           isChecked: false,
-          editNoteStatus: editNoteStatus));
+          editNoteStatus: editNoteStatus,
+          text: text,
+          date: now));
+
+      notes.sort((a, b) => b.date.compareTo(a.date));
     });
 
-    final note = NoteModel(id: id, title: title, color: color.value.toString());
+    final note = NoteModel(
+        id: id,
+        title: title,
+        color: color.value.toString(),
+        text: text,
+        date: now.toString());
 
     notesBox.put(note.id, note);
   }

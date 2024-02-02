@@ -49,7 +49,8 @@ class NameScreenState extends State<NameScreen> {
                   Navigator.pushNamed(context, '/');
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: const Text('Musisz wprowadzić imię!'),
+                    content:
+                        const Text('Imię musi zawierać co najmniej 3 znaki!'),
                     duration: const Duration(seconds: 1),
                     backgroundColor: Colors.red[400],
                   ));
