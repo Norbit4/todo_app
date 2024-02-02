@@ -12,6 +12,8 @@ class NoteAdapter extends TypeAdapter<NoteModel> {
       title: reader.read(),
       color: reader.read(),
       isChecked: reader.read(),
+      text: reader.read(),
+      date: reader.read(),
     );
   }
 
@@ -21,5 +23,7 @@ class NoteAdapter extends TypeAdapter<NoteModel> {
     writer.write(obj.title);
     writer.write(obj.color);
     writer.write(obj.isChecked);
+    writer.write(obj.text);
+    writer.write(obj.date);
   }
 }
