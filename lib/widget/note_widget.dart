@@ -76,7 +76,7 @@ class NoteWidgetState extends State<NoteWidget> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment
-                      .center, // Dodano wyśrodkowanie w poziomie
+                      .center, 
                   children: [
                     Text(
                       widget.title,
@@ -92,7 +92,6 @@ class NoteWidgetState extends State<NoteWidget> {
                         widget.text,
                         style: const TextStyle(
                           color: Colors.white,
-                          // Dodaj dowolne style dla drugiego tekstu
                         ),
                       ),
                   ],
